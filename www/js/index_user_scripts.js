@@ -45,7 +45,9 @@
         //BUTTON: SEARCH
         $(document).on("click", ".uib_w_16", function(evt) {
             var txt = $('#searchInput').val();
-            console.log(txt);
+            console.info('Search string: ' + txt);
+
+            
 
             //CLEAR SEARCH FIELD VALUE
             $('#searchInput').val("");
