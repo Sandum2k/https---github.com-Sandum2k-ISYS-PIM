@@ -56,6 +56,7 @@
 
         <!--LIBRARY-->
         <script src="./lib/angularjs-1.3.15.min.js"></script>
+        <script src="./lib/angular-sanitize.min.js"></script>
         <script src="./lib/pouchdb-3.4.0.min.js"></script>
         <script src="./lib/pouchdb.find-0.3.4.min.js"></script>
 
@@ -347,9 +348,10 @@
                                                 <div class="widget-container left-receptacle"></div>
                                                 <div class="widget-container right-receptacle"></div>
                                                 <div>
-                                                    <p>{{productInformation.description}}</p>
+                                                    <p ng-bind-html="productInformation.description"></p>
                                                 </div>
-                                            </div><span class="uib_shim"></span>
+                                            </div>
+                                            <span class="uib_shim"></span>
                                         </div>
                                     </div>
                                 </div>

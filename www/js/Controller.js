@@ -1,7 +1,7 @@
 //--------------------------//
 //      DECLARE APP         //
 //--------------------------//
-var pim = angular.module("PIM", []);
+var pim = angular.module("PIM", ["ngSanitize"]);
  
  
  
@@ -299,10 +299,15 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
             $scope.viewNode = 'PRODUCT INFO';
  
             //UPDATE VIEW
-            $scope.$apply(function(){
+            $scope.$apply(function() {
                 console.info('Display Product Info');
-                nav                         = nodeObject;
-                $scope.productInformation   = result.docs;
+                nav                     = nodeObject;
+
+                //FOR EACH BECAUSE THE CODE DOESN'T KNOW WE ONLY GET ONE PRODUCT
+                angular.forEach(result.docs, function(obj){
+                    $scope.productInformation   = obj;
+                    $scope.prodDescription      = obj.description;                  
+                });
  
                 console.log('nav is: ' + nav.NodeType +': ' + nav.nodeName);
                 console.info($scope.productInformation);
@@ -313,13 +318,10 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
             console.error(err.status);
         });
     }
- 
+});
 
-
-    //SEARCH
     
 
 
 
 
-});

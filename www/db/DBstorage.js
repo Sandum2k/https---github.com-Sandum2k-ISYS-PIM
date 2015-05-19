@@ -173,7 +173,7 @@ function searchDB_forProducts(id) {
 	});
 }
 
-//SEARCH DB FOR DOCUMENTS WITH SPESIFIC ID
+//SEARCH DB FOR DOCUMENTS WITH SPECIFIC ID
 function searchDB_byId(id) {
 	return db.find({
 		selector: { _id: {$eq: id} }
