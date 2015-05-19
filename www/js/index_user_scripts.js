@@ -89,7 +89,7 @@
         $(document).on("click", "#returnToCatalogs", function(evt) {
 
             //Open Catalogs
-            angular.element($('#afui')).scope().openCatalogs();
+            angular.element($('html')).scope().openCatalogs();
             
             //new view
             activate_subpage("#uib_page_3"); 
