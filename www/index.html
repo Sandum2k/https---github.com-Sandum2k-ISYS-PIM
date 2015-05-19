@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="PIM" ng-controller="Import">
+<html>
     <!--
   * Copyright © 2012-2015, Intel Corporation. All rights reserved.
   * Please see the included README.md file for license terms and conditions.
@@ -12,8 +12,6 @@
         <link rel="stylesheet" type="text/css" href="media_button_bar/css/media_button_bar.css">
         <link rel="stylesheet" type="text/css" href="app_framework/2.1/css/af.ui.min.css">
         <link rel="stylesheet" type="text/css" href="app_framework/2.1/css/icons.min.css">
-        
-       
 
         <!--
   * The "meta viewport" tag (below) helps your app size appropriately to a device's ideal viewport.
@@ -46,7 +44,6 @@
         <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
         <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work below -->
         <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
-
 
         <!--LIBRARY-->
         <script src="./lib/angularjs-1.3.15.min.js"></script>
@@ -83,7 +80,7 @@
         <script type="application/javascript" src="js/index_user_scripts.js"></script>
         <script type="application/javascript" src="xdk/ad/af_subpage.js"></script>
         <script type="application/javascript" src="app_framework/pageChangeRepeater.js"></script>
-        <script type="application/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+        <script type="application/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDod8zXUve4SuUcmsfStzyF0zVYpno0Fgw&amp;sensor=true"></script>
         <!--            
             You may substitute jQuery for the App Framework selector library.
             See http://app-framework-software.intel.com/documentation.php#afui/afui_jquery
@@ -150,7 +147,6 @@
             <h1>{{viewNode}}</h1>
         </header>
 
-
         <div id="content" class="uwrap">
 
             <!-- PAGE: MAIN PAGE -->
@@ -160,17 +156,6 @@
                 <div class="upage-content content-area vertical-col" id="uib_page_2">
 
                     <!-- WIDGET: BARCODE READER -->
-                    <div class="widget uib_w_11 d-margins" data-uib="app_framework/input_group" data-ver="1">
-                        <div class="formGroupHead"></div>
-                        <div class="input-group">
-                            <div class="col uib_col_5 single-col" data-uib="layout/col" data-ver="0">
-                                <div class="widget-container content-area vertical-col">
-                                    <a class="button widget uib_w_12 d-margins FrontpageButtonsize FrontPageButtonText" data-uib="app_framework/button" data-ver="1">Strek-Kode</a>
-                                    <span class="uib_shim"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- WIDGET: CAMERA -->
                     <div class="widget uib_w_17 d-margins" data-uib="app_framework/input_group" data-ver="1">
@@ -185,18 +170,18 @@
                         </div>
                     </div>
 
-                     <!-- WIDGET: SEARCH -->
+                    <!-- WIDGET: SEARCH -->
                     <div class="widget uib_w_14 d-margins" data-uib="app_framework/input_group" data-ver="1">
                         <div class="formGroupHead"></div>
                         <div class="input-group">
                             <div class="col uib_col_6 single-col" data-uib="layout/col" data-ver="0">
                                 <div class="widget-container content-area vertical-col">
 
-                                    <div class="table-thing with-label widget uib_w_15 d-margins" data-uib="app_framework/input" data-ver="1">
+                                    <div class="table-thing with-label widget uib_w_15" data-uib="app_framework/input" data-ver="1">
                                         <input id="searchInput" class="wide-control" type="text" placeholder="input...">
                                     </div>
 
-                                    <a class="button widget uib_w_16 d-margins FrontPageButtonText FrontPageButtonMargin" data-uib="app_framework/button" data-ver="1">Search</a>
+                                    <a class="button widget uib_w_16 FrontPageButtonText FrontPageButtonMargin FrontPageButtonMargins" data-uib="app_framework/button" data-ver="1">Search</a>
                                     <span class="uib_shim"></span>
                                 </div>
                             </div>
@@ -204,7 +189,6 @@
                     </div>
                 </div>
                 <!-- PAGE: END HOME-->
-
 
                 <!-- PAGE: CATALOGS -->
                 <div id="uib_page_3" class="upage-content vertical-col hidden">
@@ -217,7 +201,7 @@
 
                 <!-- PAGE: MAP -->
                 <div id="uib_page_4" class="upage-content vertical-col hidden">
-                    <div class="widget uib_w_29 maps-size d-margins rest-of-height" data-uib="media/google_maps" data-ver="0" data-rpath="null" data-animate-marker="drop" data-long="59.423172" data-lat="10.484723"></div>
+                    <div class="widget uib_w_29 maps-size d-margins rest-of-height" data-uib="media/google_maps" data-ver="0" data-rpath="null"></div>
                 </div>
 
                 <!-- PAGE: INFORMATION -->
@@ -243,8 +227,6 @@
                 </div>
             </div>
             <!-- PAGE: END MAIN PAGE -->
-
-
 
             <!-- PAGE: ABOUT -->
             <div class="upage vertical-col left panel" id="uib_page_6_Om" data-header="af-header-1" data-footer="none">
@@ -321,4 +303,5 @@
         </footer>
 
     </body>
+
 </html>

@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "https://appcenter.html5tools-software.intel.com/api/v2.0/redirect/projectrenderers/release-2015-ww13/webapp/templates-tab-view-ad/sample.zip",
       "projectGuid": "364efe6f-79f6-4f12-9afb-6c24093cb163",
-      "lastModifiedDate": 1431275257419,
+      "lastModifiedDate": 1432034455405,
       "creationDate": 1430903454219
     },
     "XDK-app-designer": "true",
@@ -18,15 +18,6 @@
     "serviceMethods": [],
     "cordovaPluginsDirectory": "plugins",
     "cordovaPlugins": [
-      {
-        "id": "org.apache.cordova.camera",
-        "version": "0.3.4",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {},
-        "dependsOn": [],
-        "dependedBy": []
-      },
       {
         "id": "com.virtualama.bs",
         "version": "",
@@ -42,8 +33,16 @@
         "sourceLocation": ""
       },
       {
-        "id": "org.apache.cordova.statusbar",
-        "version": "0.1.9",
+        "id": "org.apache.cordova.dialogs",
+        "version": "0.2.11",
+        "selectedState": "Included",
+        "data": {},
+        "paramvals": {},
+        "dependsOn": [],
+        "dependedBy": []
+      },
+      {
+        "id": "intel.xdk.device",
         "selectedState": "Included",
         "data": {},
         "paramvals": {},
@@ -117,7 +116,7 @@
         "preferences_": {
           "ios-target": "8.0",
           "ios-configuration": "adhoc",
-          "Fullscreen": false
+          "Fullscreen": true
         },
         "isActive_": true,
         "appName_": "ISYSPIM",

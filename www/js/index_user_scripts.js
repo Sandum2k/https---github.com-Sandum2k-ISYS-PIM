@@ -24,22 +24,19 @@
         /* button  Kamera */
         $(document).on("click", ".uib_w_13", function(evt) {
 
-            $('#searchInput').val("this is a test");
+    
+        
+        intel.xdk.device.scanBarcode();
 
-            navigator.camera.getPicture(onSuccess, onFail, { 
-                quality: 50,
-                destinationType: Camera.DestinationType.DATA_URL
-            });
-
-
-            function onSuccess(imageData) {
-                var image = document.getElementById('myImage');
-                image.src = "data:image/jpeg;base64," + imageData;
+        document.addEventListener("intel.xdk.device.barcode.scan", function(evt){
+            navigator.notification.beep(3);
+            if (evt.success == true) {
+                $('#searchInput').val(evt.codedata);
             }
-
-            function onFail(message) {
-                alert('Failed because: ' + message);
+            else {
+                alert("failed scan");
             }
+        },false);
         });
     
         /* button  Strek-Kode */
@@ -136,7 +133,7 @@
     
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady() {
-        console.log(navigator.camera);
+        console.log(navigator.notification);
     }
  
 })();
