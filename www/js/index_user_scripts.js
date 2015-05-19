@@ -1,81 +1,77 @@
 (function() {
  "use strict";
  
-    //hook up event handlers 
+    //HOOKUP EVENT HANDLER S
     function register_event_handlers() {
     
     
-         /* button  Home */
+        //BUTTON: HOME
         $(document).on("click", ".uib_w_7", function(evt) {
              activate_subpage("#uib_page_2"); 
         });
     
-    
-        /* button  messages */
+        //BUTTON: ??
         $(document).on("click", ".uib_w_3", function(evt) {
              activate_subpage("#uib_page_4"); 
         });
     
-        /* button  Profile */
+        //BUTTON: ??
         $(document).on("click", ".uib_w_4", function(evt) {
              activate_subpage("#uib_page_5"); 
         });
     
-        /* button  Kamera */
+        //BUTTON: CAMERA
         $(document).on("click", ".uib_w_13", function(evt) {
 
-    
-        
-        intel.xdk.device.scanBarcode();
+            //GET BARCODE INPUT
+            intel.xdk.device.scanBarcode();
 
-        document.addEventListener("intel.xdk.device.barcode.scan", function(evt){
-            navigator.notification.beep(3);
-            if (evt.success == true) {
-                $('#searchInput').val(evt.codedata);
-            }
-            else {
-                alert("failed scan");
-            }
-        },false);
+            //APPLY INPUT TO SEARCH FIELD
+            document.addEventListener("intel.xdk.device.barcode.scan", function(evt) {
+                navigator.notification.beep(3);
+                if (evt.success == true) {
+                    $('#searchInput').val(evt.codedata);
+                }
+                else { console.error(evt.error); }
+            },false);
         });
     
-        /* button  Strek-Kode */
+        //BUTTON: ??
         $(document).on("click", ".uib_w_12", function(evt) {
 
         });
-    
 
 
-        //SEARCH
+        //BUTTON: SEARCH
         $(document).on("click", ".uib_w_16", function(evt) {
             var txt = $('#searchInput').val();
             console.log(txt);
+
+            //CLEAR SEARCH FIELD VALUE
             $('#searchInput').val("");
         });
     
 
 
     
-        /* button  Varehus */
+        //BUTTON: MAP
         $(document).on("click", ".uib_w_40", function(evt) {
              activate_subpage("#uib_page_4"); 
         });
     
-        /* button  Instillinger */
+        //BUTTON: INFO
         $(document).on("click", ".uib_w_39", function(evt) {
              activate_subpage("#uib_page_5"); 
         });
     
     
-        /* button  Hjem */
+        //BUTTON: HOME
         $(document).on("click", ".uib_w_42", function(evt) {
              activate_subpage("#uib_page_2"); 
         });
     
 
-
-
-        //BUTTON CATALOGS CLICK EVENT
+        //BUTTON: CATALOGS
         $(document).on("click", ".uib_w_6", function(evt) {
 
             //Open Catalogs
@@ -87,7 +83,7 @@
 
 
 
-
+        //BUTTON: SECTIONS BACK BUTTON
         $(document).on("click", "#returnToCatalogs", function(evt) {
 
             //Open Catalogs
@@ -99,7 +95,7 @@
 
 
 
-        //BUTTON 'Cataloger'
+        //BUTTON: ??
         $(document).on("click", ".uib_w_41", function(evt) {
              activate_subpage("#uib_page_3");
              
@@ -121,7 +117,7 @@
     
 
 
-        //BUTTON 'Synkroniser'
+        //BUTTON: SYNCRONIZE
         $(document).on("click", ".uib_w_54", function(evt) {
 
             //CONNECT TO API AND GET DATA
