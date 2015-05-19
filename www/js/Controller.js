@@ -301,11 +301,11 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
             //UPDATE VIEW
             $scope.$apply(function(){
                 console.info('Display Product Info');
-                nav                     = nodeObject;
-                $scope.listStructure    = result.docs;
+                nav                         = nodeObject;
+                $scope.productInformation   = result.docs;
  
                 console.log('nav is: ' + nav.NodeType +': ' + nav.nodeName);
-                console.info($scope.listStructure);
+                console.info($scope.productInformation);
             });
  
         //COULD NOT RETRIEVE PRODUCT INFORMATION FROM DB
