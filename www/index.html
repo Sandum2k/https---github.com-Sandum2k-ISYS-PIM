@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html ng-app="PIM" ng-controller="Import">
+    <!--
+  * Copyright © 2012-2015, Intel Corporation. All rights reserved.
+  * Please see the included README.md file for license terms and conditions.
+  -->
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>ISYS PIM</title>
+        <link rel="stylesheet" type="text/css" href="media_button_bar/css/media_button_bar.css">
+        <link rel="stylesheet" type="text/css" href="app_framework/2.1/css/af.ui.min.css">
+        <link rel="stylesheet" type="text/css" href="app_framework/2.1/css/icons.min.css">
+        
+       
+
+        <!--
+  * The "meta viewport" tag (below) helps your app size appropriately to a device's ideal viewport.
+  * Note that Windows device viewports work better when initialized using the @viewport CSS rule.
+  * For a quick overview of "meta viewport" and @viewport, see this article:
+  *   http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag
+  * To see how it works, try your app on a real device with and without a "meta viewport" tag.
+  * Additional useful references include:
+  *   http://www.quirksmode.org/mobile/viewports.html
+  *   http://www.quirksmode.org/mobile/metaviewport/devices.html
+  *   https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
+-->
+
+        <!-- <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1"> -->
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
+
+        <style>
+            /* following three (cascaded) are equivalent to above three meta viewport statements */
+            /* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html */
+            /* see http://dev.w3.org/csswg/css-device-adapt/ */
+                @-ms-viewport { width: 100vw ; min-zoom: 100% ; zoom: 100% ; }          @viewport { width: 100vw ; min-zoom: 100% zoom: 100% ; }
+                @-ms-viewport { user-zoom: fixed ; min-zoom: 100% ; }                   @viewport { user-zoom: fixed ; min-zoom: 100% ; }
+                /*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
+        </style>
+
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
+
+        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+        <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work below -->
+        <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+
+
+        <!--LIBRARY-->
+        <script src="./lib/angularjs-1.3.15.min.js"></script>
+        <script src="./lib/pouchdb-3.4.0.min.js"></script>
+        <script src="./lib/pouchdb.find-0.3.4.min.js"></script>
+
+        <!--DB-->
+        <script src="./db/DBstorage.js"></script>
+
+        <!--CONTROLLERS-->
+        <script src="./js/Controller.js"></script>
+
+        <!--
+          * cordova.js is a phantom lib for "Cordova HTML5 web app," it does nothing in a "Standard HTML5 web app"
+          * Seeing a "Failed to load resource: net::ERR_FILE_NOT_FOUND" message caused by this "cordova.js" script?
+          * The cordova.js script is required if you convert your "Standard HTML5" project into a "Cordova" project.
+          * You can safely ignore the error or comment out this line if you will not be developing a Cordova app.
+        -->
+        <script src="cordova.js" id="xdkJScordova_"></script>
+
+        <script src="js/app.js"></script>
+
+        <!-- for your event code, see README and file comments for details -->
+        <script src="js/init-app.js"></script>
+        <!-- for your init code, see README and file comments for details -->
+        <script src="xdk/init-dev.js"></script>
+        <!-- normalizes device and document ready events, see file for details -->
+        <!--            
+            You may substitute jQuery for the App Framework selector library.
+            See http://app-framework-software.intel.com/documentation.php#afui/afui_jquery
+        -->
+        <script type="application/javascript" src="app_framework/2.1/appframework.js"></script>
+        <script type="application/javascript" src="app_framework/2.1/appframework.ui.js" data-ver="1"></script>
+        <script type="application/javascript" src="js/index_user_scripts.js"></script>
+        <script type="application/javascript" src="xdk/ad/af_subpage.js"></script>
+        <script type="application/javascript" src="app_framework/pageChangeRepeater.js"></script>
+        <script type="application/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+        <!--            
+            You may substitute jQuery for the App Framework selector library.
+            See http://app-framework-software.intel.com/documentation.php#afui/afui_jquery
+        -->
+        <script type="application/javascript" src="lib/jquery.min.js"></script>
+        <script type="application/javascript" src="google_maps/google_maps.js"></script>
+        <script type="application/javascript" src="xdk/appdesigner/js/rest-of-space.js"></script>
+
+        <script type="application/javascript" src="app_framework/themeRelease.js"></script>
+
+    </head>
+
+    <body ng-controller="ViewData" id="afui" class="ios7">
+
+        <!-- HEADER: MAIN PAGE w/ICON -->
+        <header class="wrapping-col wrap-element uib_w_1" data-uib="app_framework/header" data-ver="2" id="af-header-0">
+            <div class="widget uib_w_33 scale-image d-margins" data-uib="media/img" data-ver="0">
+                <figure class="figure-align">
+                    <img src="logo/iTunesConnect.png">
+                    <figcaption data-position="bottom"></figcaption>
+                </figure>
+            </div>
+        </header>
+
+        <!-- HEADER: ABOUT -->
+        <header class="wrapping-col wrap-element uib_w_23 with-back" data-uib="app_framework/header" data-ver="2" id="af-header-1">
+            <a class="button backButton">Back</a>
+            <h1>About</h1>
+        </header>
+
+        <!-- HEADER: TERMS -->
+        <header class="wrapping-col wrap-element uib_w_25 with-back" data-uib="app_framework/header" data-ver="2" id="af-header-2">
+            <a class="button backButton">Back</a>
+            <h1>Terms</h1>
+        </header>
+
+        <!-- HEADER: HELP-->
+        <header class="wrapping-col wrap-element uib_w_27 with-back" data-uib="app_framework/header" data-ver="2" id="af-header-3">
+            <a class="button backButton">Back</a>
+            <h1>Help</h1>
+        </header>
+
+        <!-- HEADER: ??? -->
+        <header class="wrapping-col wrap-element uib_w_36 with-back" data-uib="app_framework/header" data-ver="2" id="af-header-4">
+            <a class="button backButton">Back</a>
+            <h1>update index</h1>
+        </header>
+
+        <!-- HEADER: SECTIONS -->
+        <header class="wrapping-col wrap-element uib_w_42 with-back" data-uib="app_framework/header" data-ver="2" id="af-header-10">
+            <a id="returnToCatalogs" class="button backButton" ng-click="back()">Back</a>
+            <h1>{{viewNode}}</h1>
+        </header>
+
+        <!-- HEADER: PRODUCTS -->
+        <header class="wrapping-col wrap-element uib_w_47 with-back" data-uib="app_framework/header" data-ver="2" id="af-header-11">
+            <a class="button backButton" ng-click="back()">Back</a>
+            <h1>{{viewNode}}</h1>
+        </header>
+
+        <!-- HEADER: PRODUCT INFO -->
+        <header class="wrapping-col wrap-element uib_w_52 with-back" data-uib="app_framework/header" data-ver="2" id="af-header-12">
+            <a class="button backButton" ng-click="back()">Back</a>
+            <h1>{{viewNode}}</h1>
+        </header>
+
+
+        <div id="content" class="uwrap">
+
+            <!-- PAGE: MAIN PAGE -->
+            <div class="upage panel" id="mainpage" data-header="af-header-0" data-footer="af-footer-0">
+
+                <!-- PAGE: HOME -->
+                <div class="upage-content content-area vertical-col" id="uib_page_2">
+
+                    <!-- WIDGET: BARCODE READER -->
+                    <div class="widget uib_w_11 d-margins" data-uib="app_framework/input_group" data-ver="1">
+                        <div class="formGroupHead"></div>
+                        <div class="input-group">
+                            <div class="col uib_col_5 single-col" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col">
+                                    <a class="button widget uib_w_12 d-margins FrontpageButtonsize FrontPageButtonText" data-uib="app_framework/button" data-ver="1">Strek-Kode</a>
+                                    <span class="uib_shim"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WIDGET: CAMERA -->
+                    <div class="widget uib_w_17 d-margins" data-uib="app_framework/input_group" data-ver="1">
+                        <div class="formGroupHead"></div>
+                        <div class="input-group">
+                            <div class="col uib_col_7 single-col" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col">
+                                    <a class="button widget uib_w_13 FrontPageButtonText FrontpageButtonsize d-margins" data-uib="app_framework/button" data-ver="1">Camera</a>
+                                    <span class="uib_shim"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- WIDGET: SEARCH -->
+                    <div class="widget uib_w_14 d-margins" data-uib="app_framework/input_group" data-ver="1">
+                        <div class="formGroupHead"></div>
+                        <div class="input-group">
+                            <div class="col uib_col_6 single-col" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col">
+
+                                    <div class="table-thing with-label widget uib_w_15 d-margins" data-uib="app_framework/input" data-ver="1">
+                                        <input id="searchInput" class="wide-control" type="text" placeholder="input...">
+                                    </div>
+
+                                    <a class="button widget uib_w_16 d-margins FrontPageButtonText FrontPageButtonMargin" data-uib="app_framework/button" data-ver="1">Search</a>
+                                    <span class="uib_shim"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- PAGE: END HOME-->
+
+
+                <!-- PAGE: CATALOGS -->
+                <div id="uib_page_3" class="upage-content vertical-col hidden">
+                    <ul ng-repeat="data in listStructure" class="list widget uib_w_34 d-margins" data-uib="app_framework/listview" data-ver="1">
+                        <li ng-click="openNode(data._id)" class="widget uib_w_35" data-uib="app_framework/listitem" data-ver="1">
+                            <a href="#uib_page_Seksjoner" data-transition="fade">{{data.nodeName}}</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- PAGE: MAP -->
+                <div id="uib_page_4" class="upage-content vertical-col hidden">
+                    <div class="widget uib_w_29 maps-size d-margins rest-of-height" data-uib="media/google_maps" data-ver="0" data-rpath="null" data-animate-marker="drop" data-long="59.423172" data-lat="10.484723"></div>
+                </div>
+
+                <!-- PAGE: INFORMATION -->
+                <div id="uib_page_5" class="upage-content vertical-col hidden">
+                    <ul class="list widget uib_w_18 d-margins" data-uib="app_framework/listview" data-ver="1">
+
+                        <!-- ABOUT -->
+                        <li class="widget uib_w_20" data-uib="app_framework/listitem" data-ver="1">
+                            <a href="#uib_page_6_Om" data-transition="fade">About</a>
+                        </li>
+
+                        <!-- TERMS -->
+                        <li class="widget uib_w_21" data-uib="app_framework/listitem" data-ver="1">
+                            <a href="#uib_page_6_Vilkaar" data-transition="fade">Terms</a>
+                        </li>
+
+                        <!-- HELP -->
+                        <li class="widget uib_w_22" data-uib="app_framework/listitem" data-ver="1">
+                            <a href="#uib_page_6_Hjelp" data-transition="fade">Help</a>
+                        </li>
+                    </ul>
+                    <a id="APIsync" class="button widget uib_w_54 d-margins FrontPageButtonMargin FrontPageButtonMargins FrontpageButtonsize" data-uib="app_framework/button" data-ver="1">Synkroniser</a>
+                </div>
+            </div>
+            <!-- PAGE: END MAIN PAGE -->
+
+
+
+            <!-- PAGE: ABOUT -->
+            <div class="upage vertical-col left panel" id="uib_page_6_Om" data-header="af-header-1" data-footer="none">
+                <div class="widget uib_w_30 d-margins" data-uib="media/text" data-ver="0">
+                    <div class="widget-container left-receptacle"></div>
+                    <div class="widget-container right-receptacle"></div>
+                    <div>
+                        <p>Haec metropolis partim a Browcro, partira a Masenio collecta, et ab hoc ultimo digesta et composita, censura nostro- rum patrum approbata fuit, sed postea a consiliariis principis, cum typo tradenda esset, suspensa, praecipue quod</p>
+                        <p>terminos dioecesis quosdam disputationi obnoxios dicerent, melius ante, ex archivii et archidiaconatuum divisionibus designandos. Unde ultima manus a compositore non adhibita, et errata quaedam grammaticalia non correcta. Tum obscurior</p>
+                        <p>hinc inde sensus et constructio, quarundam additione aut subtractione vocum emendanda, quae auctori non vacabat, aut lubebat, re neglecta, praestare.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE: TERMS -->
+            <div class="upage vertical-col panel" id="uib_page_6_Vilkaar" data-header="af-header-2" data-footer="none">
+                <div class="widget uib_w_31 d-margins" data-uib="media/text" data-ver="0">
+                    <div class="widget-container left-receptacle"></div>
+                    <div class="widget-container right-receptacle"></div>
+                    <div>
+                        <p>Haec metropolis partim a Browcro, partira a Masenio collecta, et ab hoc ultimo digesta et composita, censura nostro- rum patrum approbata fuit, sed postea a consiliariis principis, cum typo tradenda esset, suspensa, praecipue quod</p>
+                        <p>terminos dioecesis quosdam disputationi obnoxios dicerent, melius ante, ex archivii et archidiaconatuum divisionibus designandos. Unde ultima manus a compositore non adhibita, et errata quaedam grammaticalia non correcta. Tum obscurior</p>
+                        <p>hinc inde sensus et constructio, quarundam additione aut subtractione vocum emendanda, quae auctori non vacabat, aut lubebat, re neglecta, praestare.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE: HELP -->
+            <div class="upage vertical-col panel" id="uib_page_6_Hjelp" data-header="af-header-3" data-footer="none">
+                <div class="widget uib_w_32 d-margins" data-uib="media/text" data-ver="0">
+                    <div class="widget-container left-receptacle"></div>
+                    <div class="widget-container right-receptacle"></div>
+                    <div>
+                        <p>Haec metropolis partim a Browcro, partira a Masenio collecta, et ab hoc ultimo digesta et composita, censura nostro- rum patrum approbata fuit, sed postea a consiliariis principis, cum typo tradenda esset, suspensa, praecipue quod</p>
+                        <p>terminos dioecesis quosdam disputationi obnoxios dicerent, melius ante, ex archivii et archidiaconatuum divisionibus designandos. Unde ultima manus a compositore non adhibita, et errata quaedam grammaticalia non correcta. Tum obscurior</p>
+                        <p>hinc inde sensus et constructio, quarundam additione aut subtractione vocum emendanda, quae auctori non vacabat, aut lubebat, re neglecta, praestare.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE: SECTIONS -->
+            <div class="upage vertical-col panel" id="uib_page_Seksjoner" data-header="af-header-10" data-footer="none">
+                <ul ng-repeat="data in listStructure" class="list widget uib_w_43 d-margins" data-uib="app_framework/listview" data-ver="1">
+                    <li ng-click="openNode(data._id)" class="widget uib_w_44" data-uib="app_framework/listitem" data-ver="1">
+                        <a href="#uib_page_Produkter" data-transition="fade">{{data.nodeName}}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- PAGE: PRODUCTS -->
+            <div class="upage vertical-col panel" id="uib_page_Produkter" data-header="af-header-11" data-footer="none">
+                <ul ng-repeat="data in listStructure" class="list widget uib_w_48 d-margins" data-uib="app_framework/listview" data-ver="1">
+                    <li ng-click="openNode(data._id)" class="widget uib_w_49" data-uib="app_framework/listitem" data-ver="1">
+                        <a href="#uib_page_Produktinfo" data-transition="fade">{{data.nodeName}}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- PAGE: PRODUCT INFORMATION -->
+            <div class="upage vertical-col left panel" id="uib_page_Produktinfo" data-header="af-header-12" data-footer="none">
+                <div class="widget uib_w_53 d-margins" data-uib="app_framework/checkbox" data-ver="1">
+                    <input type="checkbox" id="af-checkbox-0">
+                    <label class="content-box" for="af-checkbox-0">Checkbox</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- NAVIGATION BUTTONS/ICONS -->
+        <footer class="wrap-element uib_w_2" data-uib="app_framework/footer" data-ver="1" id="af-footer-0">
+            <a class="widget uib_w_7 d-margins icon home" data-uib="app_framework/button" data-ver="1">Home</a>
+            <a class="widget uib_w_6 d-margins icon basket" data-uib="app_framework/button" data-ver="1">Catalogs</a>
+            <a class="widget uib_w_3 d-margins icon location" data-uib="app_framework/button" data-ver="1">Map</a>
+            <a class="widget uib_w_4 d-margins icon settings" data-uib="app_framework/button" data-ver="1">Information</a>
+        </footer>
+
+    </body>
+</html>

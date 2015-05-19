@@ -1,0 +1,12 @@
+{
+  "project": {
+    "projectSettingsVersion": "1.2",
+    "currentBuildConfiguration": "Windows8",
+    "projectFiles": {},
+    "projectDirectories": {},
+    "currentService": {
+      "service": "foursquare"
+    },
+    "initialAutoPluginCount": 0
+  }
+}
