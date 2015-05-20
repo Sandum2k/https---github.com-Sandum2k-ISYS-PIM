@@ -21,12 +21,15 @@ function showPosition(position) {
 
     var latlon = new google.maps.LatLng(lat, lon);
 
-    var h = $('#uib_page_4').height();
-    console.log(h);
+    var mapHeight   = $('#uib_page_4').height();
+    var mapWidth    = $('#uib_page_4').width();
+
+    console.info('page height: ' + mapHeight);
+    console.info('page width: ' + mapWidth);
 
     mapholder = document.getElementById('mapholder');
-    mapholder.style.height = '500px';
-    mapholder.style.width = '500px';
+    mapholder.style.height = mapHeight;
+    mapholder.style.width = mapWidth;
 
 
     var myOptions = {

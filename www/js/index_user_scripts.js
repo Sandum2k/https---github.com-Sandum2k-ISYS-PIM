@@ -12,13 +12,7 @@
     
         //BUTTON: MAP
         $(document).on("click", ".uib_w_3", function(evt) {
-            console.log('clicked uib w 3');
-
-
-
-
-
-
+            getLocation();
             activate_subpage("#uib_page_4"); 
              
         });
