@@ -1,48 +1,41 @@
-L.mapbox.accessToken = 'pk.eyJ1IjoibG9kb2NyYW4iLCJhIjoiZTFldmxzcyJ9.uWtF9IEd2NA7jtII17OmTQ';
-var geolocate = document.getElementById('geolocate');
-var map = L.mapbox.map('map', 'mapbox.streets');
 
-var myLayer = L.mapbox.featureLayer().addTo(map);
+var geoMsg  = '';
+    
+function getLocation() {
+    if (navigator.geolocation) {
 
-// This uses the HTML5 geolocation API, which is available on
-// most mobile browsers and modern browsers, but not in Internet Explorer
-//
-// See this chart of compatibility for details:
-// http://caniuse.com/#feat=geolocation
-if (!navigator.geolocation) {
-    geolocate.innerHTML = 'Geolocation is not available';
-} else {
-    geolocate.onclick = function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        map.locate();
-    };
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } 
+
+    else {
+        geoMsg = "Geolocation is not supported by this browser.";
+    }
 }
 
-// Once we've got a position, zoom and center the map
-// on it, and add a single marker.
-map.on('locationfound', function(e) {
-    map.fitBounds(e.bounds);
+function showPosition(position) {
 
-    myLayer.setGeoJSON({
-        type: 'Feature',
-        geometry: {
-            type: 'Point',
-            coordinates: [e.latlng.lng, e.latlng.lat]
-        },
-        properties: {
-            'title': 'Here I am!',
-            'marker-color': '#ff8888',
-            'marker-symbol': 'star'
-        }
-    });
+    var lat  = position.coords.latitude;
+    var lon = position.coords.longitude;
 
-    // And hide the geolocation button
-    geolocate.parentNode.removeChild(geolocate);
-});
+    console.info('coordinates: ' + lat + ',' + lon); 
 
-// If the user chooses not to allow their location
-// to be shared, display an error message.
-map.on('locationerror', function() {
-    geolocate.innerHTML = 'Position could not be found';
-});
+    var latlon = new google.maps.LatLng(lat, lon);
+
+    var h = $('#uib_page_4').height();
+    console.log(h);
+
+    mapholder = document.getElementById('mapholder');
+    mapholder.style.height = '100%';
+    mapholder.style.width = '500px';
+
+
+    var myOptions = {
+        center:latlon,zoom:14,
+        mapTypeId:google.maps.MapTypeId.ROADMAP,
+        mapTypeControl:false,
+        navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+    }
+    
+    var map = new google.maps.Map(document.getElementById("mapholder"), myOptions);
+    var marker = new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
+}

@@ -20,17 +20,16 @@ pim.controller('Import', function($scope, $http, $filter) {
     
     $scope.connectWithAPI = function() {
 
-        PouchDB.destroy('PIM_Storage');
+        
 
         var getCatalogs = $http.get('http://isys-pim-dev.isys.no/ibridge/ws/Catalog/GetAll');
-    
  
         getCatalogs.success(function(data, status, headers, config) {
             $scope.catalogs = data.Catalogs;
  
             //LOOP THROUGH EVERY CATALOG & CATCH DATA
             angular.forEach(data.Catalogs, function(isCatalog) {
- 
+
                 //ADD CATALOGS TO POUCH DB
                 addCatalogs(isCatalog);
  
@@ -215,7 +214,7 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
         //ERROR SEARCHING DB
         }).catch(function(err){
             console.log('Something went wrong searching DB for Catalogs');
-            console.error(err);
+            console.error(err.status);
         }); 
     }
  

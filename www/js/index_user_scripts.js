@@ -17,9 +17,6 @@
 
 
 
-            
-
-            
 
 
             activate_subpage("#uib_page_4"); 
@@ -141,7 +138,7 @@
             //CONNECT TO API AND GET DATA
             
             angular.element($('html')).scope().connectWithAPI();
-            alert("tadaa 1 ");
+
         });
     }
 
