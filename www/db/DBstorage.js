@@ -180,11 +180,14 @@ function searchDB_byId(id) {
 	});
 }
 
-//TODO
-//SEARCH FOR ANYTHING
-function searchDB_all() {
+//SEARCH DB FOR ALL PRODUCT NODES
+function searchDB_forAllProductNodes() {
 	return db.find({
-		selector: { _id: {$exists: true} }
+		selector: { 
+			NodeType: {$eq: 'SECTION'} ,
+			nodeName: {$exists: true}
+		},
+		sort: ['nodeName']
 	});
 }
 

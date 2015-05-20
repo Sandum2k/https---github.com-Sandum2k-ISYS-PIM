@@ -48,10 +48,6 @@
         $(document).on("click", ".uib_w_16", function(evt) {
             var userInput = $('#search1').val();
             console.log(userInput);
-
-            
-
-
         });
     
 

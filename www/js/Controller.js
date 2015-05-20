@@ -1,7 +1,7 @@
 //--------------------------//
 //      DECLARE APP         //
 //--------------------------//
-var pim = angular.module("PIM", ['ngSanitize', 'LiveSearch']);
+var pim = angular.module("PIM", ['ngSanitize']);
  
  
  
@@ -12,15 +12,13 @@ var pim = angular.module("PIM", ['ngSanitize', 'LiveSearch']);
 //this controller connects with the isys api
 //and retrieves objects before passing objects to DBstorage.js -functions
 pim.controller('Import', function($scope, $http, $filter) {
-    console.info('import controller loaded');
+    console.info('Import controller loaded');
  
     //GET CATALOG INFORMATION FROM API
     //collects catalog data using the 'Catalog/GetAll' api
     //loops through each catalog and passes info to the 'searchForNodes' -function
     
     $scope.connectWithAPI = function() {
-
-        
 
         var getCatalogs = $http.get('http://isys-pim-dev.isys.no/ibridge/ws/Catalog/GetAll');
  
@@ -121,7 +119,7 @@ pim.controller('Import', function($scope, $http, $filter) {
 //--------------------------//
 //Handles what is shown in the view based on click events.
 pim.controller('ViewData', function($scope, $q, $http, $window) {
-    console.info('view data controller enabled');
+    console.info('ViewData controller loaded');
  
     //USED TO DETERMINE ACTIVE VIEW
     //'nav' saves the object of which '_id'
@@ -205,7 +203,7 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
             //IF NO CATALOGS ARE FOUND: DISPLAY MSG
             if (result.docs == false) { 
                 console.log('no catalogs found');
-                $('#noCat').text('No catalogs found. Try to sync with server.');
+                $('#noCat').text('No data saved. Try to sync with API.');
             }
             else { $('#noCat').text(''); }
 
@@ -329,29 +327,49 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
             console.error(err.status);
         });
     }
+
+
+    $(function() {
+        
+        console.log('populate started');
+
+        var node = searchDB_forAllProductNodes();
+
+        node.then(function(result) {
+            $scope.$apply(function() {
+
+                //ONE OBJECT CONTAINING ALL THE OBJECTS TO BE COMPARED
+                console.log(result);
+
+                angular.forEach(result.docs, function(obj){
+                    
+                    //GETS ONE AND ONE OBJECT
+                    console.log(obj);
+
+
+                });
+
+                console.log(groups);
+           });
+
+
+        }).catch(function(err) {
+
+        });
+
+
+
+    });
+
+
+  
+
+
+
 });
 
     
 
-    pim.controller("userSearch", function($scope, $http, $q, $window) {
-        
-        $scope.mySearch = "";
-        
-        $scope.mySearchCallback = function(params) {
-          var defer = $q.defer();
-
-          $http.jsonp("http://gd.geobytes.com/AutoCompleteCity?callback=JSON_CALLBACK&q=" + params.query)
-          .success(function(response) {
-            defer.resolve(response);
-          });
-            
-          return defer.promise;
-        };
-    });
-
-    function callback(response, status) {
-      console.log(status);
-    };
 
 
 

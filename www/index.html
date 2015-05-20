@@ -42,11 +42,11 @@
                 @viewport { user-zoom: fixed ; min-zoom: 100% ; }
                 /*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   
                   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
+
         </style>
 
         <link rel="stylesheet" href="css/app.css">
         <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
-        <link rel="stylesheet" type="text/css" href="css/angular-liveSearch.css">
 
         <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
         <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work below -->
@@ -58,7 +58,6 @@
         <script src="./lib/jQuery-2.1.4-min.js"></script>
         <script src="./lib/angularjs-1.3.15.min.js"></script>
         <script src="./lib/angular-sanitize.min.js"></script>
-        <script src="./lib/angular-liveSearch.js"></script>
 
         <!--DB-->
         <script src="./db/DBstorage.js"></script>
@@ -188,12 +187,16 @@
 
                                     <div class="table-thing with-label widget uib_w_15" data-uib="app_framework/input" data-ver="1">
 
-                                        <div ng-controller='userSearch'>
-                                            <live-search id="search1" type="text" placeholder="type to search"
-                                              live-search-callback="mySearchCallback"
-                                              ng-model="mySearch" class="form-control">
-                                            </live-search>
-                                        </div>
+
+                                        <select  class="js-example-basic-single">
+                                            <option value=""></option>
+
+                                        </select>
+
+
+
+
+                                        <!-- <input id="searchInput" class="wide-control" type="text" placeholder="Type to search"> -->
                                     </div>
 
                                     <a class="button widget uib_w_16 FrontPageButtonText FrontPageButtonMargin FrontPageButtonMargins" data-uib="app_framework/button" data-ver="1">Search</a>
@@ -240,7 +243,7 @@
                             <a href="#uib_page_6_Hjelp" data-transition="fade">Help</a>
                         </li>
                     </ul>
-                    <a id="APIsync" class="button widget uib_w_54 d-margins FrontPageButtonText FrontPageButtonMargin FrontPageButtonMargins FrontpageButtonsize" data-uib="app_framework/button" data-ver="1">Syncronize</a>
+                    <a id="APIsync" class="button widget uib_w_54 d-margins FrontPageButtonText FrontPageButtonMargin FrontPageButtonMargins FrontpageButtonsize" data-uib="app_framework/button" data-ver="1">Synchronize</a>
                 </div>
             </div>
             <!-- PAGE: END MAIN PAGE -->
