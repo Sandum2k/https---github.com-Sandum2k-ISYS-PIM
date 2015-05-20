@@ -60,7 +60,7 @@
         $(document).on("click", ".uib_w_40", function(evt) {
              activate_subpage("#uib_page_4");
 
-
+             console.log('CLICK ME');
 
         });
     

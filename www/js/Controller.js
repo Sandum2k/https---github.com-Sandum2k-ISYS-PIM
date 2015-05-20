@@ -1,7 +1,7 @@
 //--------------------------//
 //      DECLARE APP         //
 //--------------------------//
-var pim = angular.module("PIM", ["ngSanitize"]);
+var pim = angular.module("PIM", ['ngSanitize']);
  
  
  
