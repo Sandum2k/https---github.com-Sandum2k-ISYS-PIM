@@ -42,6 +42,10 @@
                 @viewport { user-zoom: fixed ; min-zoom: 100% ; }
                 /*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   
                   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
+
+            /* map style for jQuery Google geolocalization */
+            #map-page, #map-canvas { width: 100%; height: 100%; padding: 0; }
+
         </style>
 
         <link rel="stylesheet" href="css/app.css">
@@ -61,6 +65,10 @@
 
         <!--CONTROLLERS-->
         <script src="./js/Controller.js"></script>
+
+        <!-- MAP -->
+
+
 
         <!--
           * cordova.js is a phantom lib for "Cordova HTML5 web app," it does nothing in a "Standard HTML5 web app"
@@ -200,7 +208,16 @@
 
                 <!-- PAGE: MAP -->
                 <div id="uib_page_4" class="upage-content vertical-col hidden">
+<<<<<<< HEAD
 
+=======
+                    <div data-role="page" id="map-page" data-url="map-page">
+
+                        <div role="main" class="ui-content" id="map-canvas">
+                            <!-- map loads here... -->
+                        </div>
+                    </div>
+>>>>>>> origin/Develop
                 </div>
 
                 <!-- PAGE: INFORMATION -->
@@ -288,26 +305,9 @@
             <div class="upage vertical-col left panel" id="uib_page_Produktinfo" data-header="af-header-12" data-footer="none">
 
                 <div class="grid grid-pad urow uib_row_2 row-height-2" data-uib="layout/row" data-ver="0">
-                    <div class="col uib_col_10 col-0_5-12" data-uib="layout/col" data-ver="0">
-                        <div class="widget-container content-area vertical-col">
 
-                            <div class="widget uib_w_57 d-margins" data-uib="app_framework/input_group" data-ver="1">
-                                <div class="formGroupHead"></div>
-                                <div class="input-group">
-                                    <div class="col uib_col_11 single-col" data-uib="layout/col" data-ver="0">
-                                        <div class="widget-container content-area vertical-col">
-                                            <div class="widget uib_w_55 ProductImage" data-uib="media/img" data-ver="0">
-                                                <figure class="figure-align">
-                                                    <img src="images/Strabburg.jpg">
-                                                    <figcaption data-position="bottom"></figcaption>
-                                                </figure>
-                                            </div><span class="uib_shim"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><span class="uib_shim"></span>
-                        </div>
-                    </div>
+
+                    <!-- FIELD: PRODUCT NAME-->
                     <div class="col uib_col_9 col-0_7-12" data-uib="layout/col" data-ver="0">
                         <div class="widget-container content-area vertical-col">
 
@@ -323,6 +323,7 @@
                     <span class="uib_shim"></span>
                 </div>
 
+                <!-- FIELD: PRODUCT DESCRIPTION-->
                 <div class="grid grid-pad urow uib_row_3 row-height-3" data-uib="layout/row" data-ver="0">
                     <div class="col uib_col_12 col-0_12-12" data-uib="layout/col" data-ver="0">
                         <div class="widget-container content-area vertical-col">
@@ -349,6 +350,7 @@
                     <span class="uib_shim"></span>
                 </div>
 
+                <!-- FIELD: PRODUCT SPECS -->
                 <div class="grid grid-pad urow uib_row_4 row-height-4 rest-of-height" data-uib="layout/row" data-ver="0">
                     <div class="col uib_col_14 col-0_12-12" data-uib="layout/col" data-ver="0">
                         <div class="widget-container content-area vertical-col">
@@ -363,35 +365,35 @@
                                                 <div class="widget-container left-receptacle"></div>
                                                 <div class="widget-container right-receptacle"></div>
                                                 <div>
-                                                    <p>P.Number</p>
+                                                    <p>{{productInformation.productNr}}</p>
                                                 </div>
                                             </div>
                                             <div class="widget uib_w_65" data-uib="media/text" data-ver="0">
                                                 <div class="widget-container left-receptacle"></div>
                                                 <div class="widget-container right-receptacle"></div>
                                                 <div>
-                                                    <p>P.Price</p>
+                                                    <p>{{productInformation.price}}</p>
                                                 </div>
                                             </div>
                                             <div class="widget uib_w_64" data-uib="media/text" data-ver="0">
                                                 <div class="widget-container left-receptacle"></div>
                                                 <div class="widget-container right-receptacle"></div>
                                                 <div>
-                                                    <p>P.Group</p>
+                                                    <p>{{productInformation.ProductGroup}}</p>
                                                 </div>
                                             </div>
                                             <div class="widget uib_w_62" data-uib="media/text" data-ver="0">
                                                 <div class="widget-container left-receptacle"></div>
                                                 <div class="widget-container right-receptacle"></div>
                                                 <div>
-                                                    <p>P.Size</p>
+                                                    <p>{{productInformation.color}}</p>
                                                 </div>
                                             </div>
                                             <div class="widget uib_w_63" data-uib="media/text" data-ver="0">
                                                 <div class="widget-container left-receptacle"></div>
                                                 <div class="widget-container right-receptacle"></div>
                                                 <div>
-                                                    <p>P.Color</p>
+                                                    <p>{{productInformation.size}}</p>
                                                 </div>
                                             </div><span class="uib_shim"></span>
                                         </div>
