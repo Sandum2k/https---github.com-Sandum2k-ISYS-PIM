@@ -10,9 +10,20 @@
              activate_subpage("#uib_page_2"); 
         });
     
-        //BUTTON: ??
+        //BUTTON: MAP
         $(document).on("click", ".uib_w_3", function(evt) {
-             activate_subpage("#uib_page_4"); 
+            console.log('clicked uib w 3');
+
+
+
+
+            
+
+            
+
+
+            activate_subpage("#uib_page_4"); 
+             
         });
     
         //BUTTON: ??
@@ -56,12 +67,14 @@
 
 
     
-        //BUTTON: MAP
+        //BUTTON: ??
         $(document).on("click", ".uib_w_40", function(evt) {
-             activate_subpage("#uib_page_4");
+             
+            console.log('clicked uib w 40');
+            activate_subpage("#uib_page_4");
 
-             console.log('CLICK ME');
 
+             
         });
     
         //BUTTON: INFO
@@ -92,7 +105,7 @@
         $(document).on("click", "#returnToCatalogs", function(evt) {
 
             //Open Catalogs
-            angular.element($('html')).scope().openCatalogs();
+            angular.element($('#afui')).scope().openCatalogs();
             
             //new view
             activate_subpage("#uib_page_3"); 

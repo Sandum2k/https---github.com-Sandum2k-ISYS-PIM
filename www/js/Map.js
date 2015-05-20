@@ -1,35 +1,48 @@
-/*
- * Google Maps documentation: http://code.google.com/apis/maps/documentation/javascript/basics.html
- * Geolocation documentation: http://dev.w3.org/geo/api/spec-source.html
- */
+L.mapbox.accessToken = 'pk.eyJ1IjoibG9kb2NyYW4iLCJhIjoiZTFldmxzcyJ9.uWtF9IEd2NA7jtII17OmTQ';
+var geolocate = document.getElementById('geolocate');
+var map = L.mapbox.map('map', 'mapbox.streets');
 
-$( document ).on( "pageinit", "#map-page", function() {
-    var defaultLatLng = new google.maps.LatLng(34.0983425, -118.3267434);  // Default to Hollywood, CA when no geolocation support
-    if ( navigator.geolocation ) {
-        function success(pos) {
-            // Location found, show map with these coordinates
-            drawMap(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
+// This uses the HTML5 geolocation API, which is available on
+// most mobile browsers and modern browsers, but not in Internet Explorer
+//
+// See this chart of compatibility for details:
+// http://caniuse.com/#feat=geolocation
+if (!navigator.geolocation) {
+    geolocate.innerHTML = 'Geolocation is not available';
+} else {
+    geolocate.onclick = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        map.locate();
+    };
+}
+
+// Once we've got a position, zoom and center the map
+// on it, and add a single marker.
+map.on('locationfound', function(e) {
+    map.fitBounds(e.bounds);
+
+    myLayer.setGeoJSON({
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [e.latlng.lng, e.latlng.lat]
+        },
+        properties: {
+            'title': 'Here I am!',
+            'marker-color': '#ff8888',
+            'marker-symbol': 'star'
         }
-        function fail(error) {
-            drawMap(defaultLatLng);  // Failed to find location, show default map
-        }
-        // Find the users current position.  Cache the location for 5 minutes, timeout after 6 seconds
-        navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 500000, enableHighAccuracy:true, timeout: 6000});
-    } else {
-        drawMap(defaultLatLng);  // No geolocation support, show default map
-    }
-    function drawMap(latlng) {
-        var myOptions = {
-            zoom: 10,
-            center: latlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
-        // Add an overlay to the map of current lat/lng
-        var marker = new google.maps.Marker({
-            position: latlng,
-            map: map,
-            title: "Greetings!"
-        });
-    }
+    });
+
+    // And hide the geolocation button
+    geolocate.parentNode.removeChild(geolocate);
+});
+
+// If the user chooses not to allow their location
+// to be shared, display an error message.
+map.on('locationerror', function() {
+    geolocate.innerHTML = 'Position could not be found';
 });
