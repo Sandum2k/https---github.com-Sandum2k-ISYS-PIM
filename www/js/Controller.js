@@ -1,7 +1,7 @@
 //--------------------------//
 //      DECLARE APP         //
 //--------------------------//
-var pim = angular.module("PIM", ['ngSanitize']);
+var pim = angular.module("PIM", ['ngSanitize', 'LiveSearch']);
  
  
  
@@ -201,7 +201,15 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
  
         //WAIT FOR RESULT
         promise.then(function(result) {
- 
+
+            //IF NO CATALOGS ARE FOUND: DISPLAY MSG
+            if (result.docs == false) { 
+                console.log('no catalogs found');
+                $('#noCat').text('No catalogs found. Try to sync with server.');
+            }
+            else { $('#noCat').text(''); }
+
+
             //APPLY RESULT TO SCOPE & UPDATE VIEW
             $scope.$apply(function(){
                 console.info('Dispaly Catalogs');
@@ -215,7 +223,7 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
         }).catch(function(err){
             console.log('Something went wrong searching DB for Catalogs');
             console.error(err.status);
-        }); 
+        });
     }
  
  
@@ -324,6 +332,27 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
 });
 
     
+
+    pim.controller("userSearch", function($scope, $http, $q, $window) {
+        
+        $scope.mySearch = "";
+        
+        $scope.mySearchCallback = function(params) {
+          var defer = $q.defer();
+
+          $http.jsonp("http://gd.geobytes.com/AutoCompleteCity?callback=JSON_CALLBACK&q=" + params.query)
+          .success(function(response) {
+            defer.resolve(response);
+          });
+            
+          return defer.promise;
+        };
+    });
+
+    function callback(response, status) {
+      console.log(status);
+    };
+
 
 
 

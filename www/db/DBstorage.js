@@ -180,11 +180,12 @@ function searchDB_byId(id) {
 	});
 }
 
+//TODO
 //SEARCH FOR ANYTHING
-function searchDB_all(string) {
-	var results;
-
-
+function searchDB_all() {
+	return db.find({
+		selector: { _id: {$exists: true} }
+	});
 }
 
 

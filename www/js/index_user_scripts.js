@@ -46,13 +46,12 @@
 
         //BUTTON: SEARCH
         $(document).on("click", ".uib_w_16", function(evt) {
-            var txt = $('#searchInput').val();
-            console.info('Search string: ' + txt);
+            var userInput = $('#search1').val();
+            console.log(userInput);
 
             
 
-            //CLEAR SEARCH FIELD VALUE
-            $('#searchInput').val("");
+
         });
     
 
@@ -62,10 +61,7 @@
         $(document).on("click", ".uib_w_40", function(evt) {
              
             console.log('clicked uib w 40');
-            activate_subpage("#uib_page_4");
-
-
-             
+            activate_subpage("#uib_page_4"); 
         });
     
         //BUTTON: INFO
@@ -129,8 +125,11 @@
         //BUTTON: SYNCRONIZE
         $(document).on("click", ".uib_w_54", function(evt) {
 
+            //DELETE LOCAL DATA
+            //db.destroy(); //TODO: Causes mutations.
+            //console.info('local data cleared.');
+
             //CONNECT TO API AND GET DATA
-            
             angular.element($('html')).scope().connectWithAPI();
 
         });

@@ -1,5 +1,4 @@
 
-var geoMsg  = '';
     
 function getLocation() {
     if (navigator.geolocation) {
@@ -8,7 +7,7 @@ function getLocation() {
     } 
 
     else {
-        geoMsg = "Geolocation is not supported by this browser.";
+        $('#mapholder').text('Geolocation is not supported on this device.');
     }
 }
 
