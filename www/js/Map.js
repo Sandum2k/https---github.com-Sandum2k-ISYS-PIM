@@ -25,7 +25,7 @@ function showPosition(position) {
     console.log(h);
 
     mapholder = document.getElementById('mapholder');
-    mapholder.style.height = '100%';
+    mapholder.style.height = '500px';
     mapholder.style.width = '500px';
 
 
