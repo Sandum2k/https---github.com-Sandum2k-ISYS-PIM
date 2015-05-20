@@ -437,9 +437,7 @@ body:not(#afui) .upage-outer {
   text-align: right !important;
 }
 @media all {
-  #afui .maps-size {
-    height: 300px;
-  }
+  
 }
 .uib-card {
   position: relative;

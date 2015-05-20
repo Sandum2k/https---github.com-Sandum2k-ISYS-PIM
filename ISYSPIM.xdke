@@ -5,7 +5,8 @@
     "projectFiles": {},
     "projectDirectories": {},
     "currentService": {
-      "service": "foursquare"
+      "endPoint": "Search",
+      "service": "googleplaces"
     },
     "initialAutoPluginCount": 0
   }

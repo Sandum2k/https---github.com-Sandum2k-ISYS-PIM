@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html ng-app="PIM" ng-controller="Import">
 <!--IMPORTANT: <html ng-app="PIM" ng-controller="Import"> -->
-
-
 <html>
-
+    <!--IMPORTANT: <html ng-app="PIM" ng-controller="Import"> -->
     <!--
-    * Copyright © 2012-2015, Intel Corporation. All rights reserved.
-    * Please see the included README.md file for license terms and conditions.
-    -->
+  * Copyright © 2012-2015, Intel Corporation. All rights reserved.
+  * Please see the included README.md file for license terms and conditions.
+  -->
 
     <head>
         <meta charset="UTF-8">
@@ -19,16 +16,16 @@
         <link rel="stylesheet" type="text/css" href="app_framework/2.1/css/icons.min.css">
 
         <!--
-          * The "meta viewport" tag (below) helps your app size appropriately to a device's ideal viewport.
-          * Note that Windows device viewports work better when initialized using the @viewport CSS rule.
-          * For a quick overview of "meta viewport" and @viewport, see this article:
-          *   http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag
-          * To see how it works, try your app on a real device with and without a "meta viewport" tag.
-          * Additional useful references include:
-          *   http://www.quirksmode.org/mobile/viewports.html
-          *   http://www.quirksmode.org/mobile/metaviewport/devices.html
-          *   https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
-        -->
+  * The "meta viewport" tag (below) helps your app size appropriately to a device's ideal viewport.
+  * Note that Windows device viewports work better when initialized using the @viewport CSS rule.
+  * For a quick overview of "meta viewport" and @viewport, see this article:
+  *   http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag
+  * To see how it works, try your app on a real device with and without a "meta viewport" tag.
+  * Additional useful references include:
+  *   http://www.quirksmode.org/mobile/viewports.html
+  *   http://www.quirksmode.org/mobile/metaviewport/devices.html
+  *   https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
+-->
 
         <!-- <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1"> -->
         <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
@@ -56,7 +53,6 @@
 
         <!--LIBRARY-->
         <script src="./lib/angularjs-1.3.15.min.js"></script>
-        <script src="./lib/angular-sanitize.min.js"></script>
         <script src="./lib/pouchdb-3.4.0.min.js"></script>
         <script src="./lib/pouchdb.find-0.3.4.min.js"></script>
 
@@ -90,7 +86,7 @@
         <script type="application/javascript" src="js/index_user_scripts.js"></script>
         <script type="application/javascript" src="xdk/ad/af_subpage.js"></script>
         <script type="application/javascript" src="app_framework/pageChangeRepeater.js"></script>
-        <script type="application/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDod8zXUve4SuUcmsfStzyF0zVYpno0Fgw&amp;sensor=true"></script>
+        <script type="application/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCW3iVncjZ2pRQ5T81NgEbBnwMrB29BE5I&amp;sensor=true"></script>
         <!--            
             You may substitute jQuery for the App Framework selector library.
             See http://app-framework-software.intel.com/documentation.php#afui/afui_jquery
@@ -99,20 +95,13 @@
         <script type="application/javascript" src="google_maps/google_maps.js"></script>
         <script type="application/javascript" src="xdk/appdesigner/js/rest-of-space.js"></script>
 
-        <script type="application/javascript" src="app_framework/themeRelease.js"></script>
-
     </head>
 
-    <body ng-controller="ViewData" id="afui" class="ios7">
+    <body ng-controller="ViewData" id="afui" class="">
 
         <!-- HEADER: MAIN PAGE w/ICON -->
         <header class="wrapping-col wrap-element uib_w_1" data-uib="app_framework/header" data-ver="2" id="af-header-0">
-            <div class="widget uib_w_33 scale-image d-margins" data-uib="media/img" data-ver="0">
-                <figure class="figure-align">
-                    <img src="logo/iTunesConnect.png">
-                    <figcaption data-position="bottom"></figcaption>
-                </figure>
-            </div>
+
         </header>
 
         <!-- HEADER: ABOUT -->
@@ -204,14 +193,14 @@
                 <div id="uib_page_3" class="upage-content vertical-col hidden">
                     <ul ng-repeat="data in listStructure" class="list widget uib_w_34 d-margins" data-uib="app_framework/listview" data-ver="1">
                         <li ng-click="openNode(data._id)" class="widget uib_w_35" data-uib="app_framework/listitem" data-ver="1">
-                            <a href="#uib_page_Seksjoner" data-transition="fade">{{data.nodeName}}</a>
+                            <a href="#uib_page_Seksjoner" data-transition="fade">{{data.nodeName}}</a> 
                         </li>
                     </ul>
                 </div>
 
                 <!-- PAGE: MAP -->
                 <div id="uib_page_4" class="upage-content vertical-col hidden">
-                    <div class="widget uib_w_29 maps-size d-margins rest-of-height" data-uib="media/google_maps" data-ver="0" data-rpath="null"></div>
+
                 </div>
 
                 <!-- PAGE: INFORMATION -->
@@ -326,7 +315,7 @@
                                 <div class="widget-container left-receptacle"></div>
                                 <div class="widget-container right-receptacle"></div>
                                 <div>
-                                    <p>{{productInformation.productName}}</p>
+                                    <p>P.Name</p>
                                 </div>
                             </div><span class="uib_shim"></span>
                         </div>
@@ -348,10 +337,9 @@
                                                 <div class="widget-container left-receptacle"></div>
                                                 <div class="widget-container right-receptacle"></div>
                                                 <div>
-                                                    <p ng-bind-html="productInformation.description"></p>
+                                                    <p>P.Description</p>
                                                 </div>
-                                            </div>
-                                            <span class="uib_shim"></span>
+                                            </div><span class="uib_shim"></span>
                                         </div>
                                     </div>
                                 </div>

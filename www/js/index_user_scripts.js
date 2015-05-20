@@ -28,7 +28,7 @@
 
             //APPLY INPUT TO SEARCH FIELD
             document.addEventListener("intel.xdk.device.barcode.scan", function(evt) {
-                navigator.notification.beep(3);
+                navigator.notification.beep(1);
                 if (evt.success == true) {
                     $('#searchInput').val(evt.codedata);
                 }
@@ -123,7 +123,9 @@
         $(document).on("click", ".uib_w_54", function(evt) {
 
             //CONNECT TO API AND GET DATA
+            
             angular.element($('html')).scope().connectWithAPI();
+            alert("tadaa 1 ");
         });
     }
 
