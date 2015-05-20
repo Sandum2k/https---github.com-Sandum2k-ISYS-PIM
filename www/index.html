@@ -193,7 +193,9 @@
                                         <div ng-controller='userSearch'>
                                             <live-search id="search1" type="text" placeholder="Type to search"
                                                 live-search-callback="mySearchCallback"
-                                                ng-model="mySearch" class="form-control">
+                                                    live-search-item-template="{{result.name}}"
+                                                    ng-model="mySearch" class="form-control">
+
                                             </live-search>
                                         </div>
 

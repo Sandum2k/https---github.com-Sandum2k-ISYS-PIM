@@ -181,14 +181,13 @@ function searchDB_byId(id) {
 }
 
 //SEARCH DB FOR ALL PRODUCT NODES
-function searchDB_forAllProductNodes() {
-	return db.find({
-		selector: { 
-			NodeType: {$eq: 'SECTION'} ,
-			nodeName: {$exists: true}
-		},
-		sort: ['nodeName']
-	});
+function searchDB_getAllProducts() {
+    return db.find({
+        selector: {
+            productName: {$exists: true}
+        },
+        sort: ['productName']
+    });
 }
 
 

@@ -332,18 +332,46 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
 
 
 pim.controller("userSearch", function($scope, $http, $q, $window) {
-    
+
     $scope.mySearch = "";
+    $scope.dataz = [];
     
     $scope.mySearchCallback = function(params) {
-      var defer = $q.defer();
 
-      $http.jsonp("http://gd.geobytes.com/AutoCompleteCity?callback=JSON_CALLBACK&q=" + params.query)
-      .success(function(response) {
-        defer.resolve(response);
-      });
-        
-      return defer.promise;
+        var defer = $q.defer();
+        var node = searchDB_getAllProducts();
+
+        node.then(function(result) {
+            $scope.$apply(function () {
+
+                $scope.dataz = [];
+
+                console.log('i searched for: '+params.query);
+
+                //ONE OBJECT CONTAINING ALL THE OBJECTS TO BE COMPARED
+                angular.forEach(result.docs, function (obj) {
+
+                    var search = new RegExp(params.query, 'gi');
+
+                    if (obj.productName.match(search)) {
+                        $scope.dataz.push({name: obj.productName});
+                    }
+                    else {
+                        console.log('miss on: ' + obj.productName);
+                    }
+
+
+                });
+
+            });
+        })
+        .catch(function(err) {
+
+        });
+
+        defer.resolve($scope.dataz);
+
+        return defer.promise;
     };
 });
 
