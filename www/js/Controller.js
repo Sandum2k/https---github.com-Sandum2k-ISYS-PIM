@@ -1,7 +1,7 @@
 //--------------------------//
 //      DECLARE APP         //
 //--------------------------//
-var pim = angular.module("PIM", ['ngSanitize']);
+var pim = angular.module("PIM", ['ngSanitize', 'LiveSearch']);
  
  
  
@@ -327,46 +327,36 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
             console.error(err.status);
         });
     }
+});
 
 
-    $(function() {
+
+pim.controller("userSearch", function($scope, $http, $q, $window) {
+    
+    $scope.mySearch = "";
+    
+    $scope.mySearchCallback = function(params) {
+      var defer = $q.defer();
+
+      $http.jsonp("http://gd.geobytes.com/AutoCompleteCity?callback=JSON_CALLBACK&q=" + params.query)
+      .success(function(response) {
+        defer.resolve(response);
+      });
         
-        console.log('populate started');
+      return defer.promise;
+    };
+});
 
-        var node = searchDB_forAllProductNodes();
-
-        node.then(function(result) {
-            $scope.$apply(function() {
-
-                //ONE OBJECT CONTAINING ALL THE OBJECTS TO BE COMPARED
-                console.log(result);
-
-                angular.forEach(result.docs, function(obj){
-                    
-                    //GETS ONE AND ONE OBJECT
-                    console.log(obj);
-
-
-                });
-
-                console.log(groups);
-           });
-
-
-        }).catch(function(err) {
-
-        });
-
-
-
-    });
+function callback(response, status) {
+  console.log(status);
+};
 
 
   
 
 
 
-});
+
 
     
 

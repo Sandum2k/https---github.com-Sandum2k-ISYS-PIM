@@ -47,6 +47,7 @@
 
         <link rel="stylesheet" href="css/app.css">
         <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
+        <link rel="stylesheet" type="text/css" href="css/angular-LiveSearch.css">
 
         <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
         <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work below -->
@@ -58,6 +59,7 @@
         <script src="./lib/jQuery-2.1.4-min.js"></script>
         <script src="./lib/angularjs-1.3.15.min.js"></script>
         <script src="./lib/angular-sanitize.min.js"></script>
+        <script src="./lib/angular-liveSearch.min.js"></script>
 
         <!--DB-->
         <script src="./db/DBstorage.js"></script>
@@ -188,10 +190,12 @@
                                     <div class="table-thing with-label widget uib_w_15" data-uib="app_framework/input" data-ver="1">
 
 
-                                        <select  class="js-example-basic-single">
-                                            <option value=""></option>
-
-                                        </select>
+                                        <div ng-controller='userSearch'>
+                                            <live-search id="search1" type="text" placeholder="Type to search"
+                                                live-search-callback="mySearchCallback"
+                                                ng-model="mySearch" class="form-control">
+                                            </live-search>
+                                        </div>
 
 
 
