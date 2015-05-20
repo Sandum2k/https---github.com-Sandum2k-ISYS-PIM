@@ -19,6 +19,9 @@ pim.controller('Import', function($scope, $http, $filter) {
     //loops through each catalog and passes info to the 'searchForNodes' -function
     
     $scope.connectWithAPI = function() {
+
+        PouchDB.destroy('PIM_Storage');
+
         var getCatalogs = $http.get('http://isys-pim-dev.isys.no/ibridge/ws/Catalog/GetAll');
  
         getCatalogs.success(function(data, status, headers, config) {
