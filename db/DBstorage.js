@@ -201,6 +201,7 @@ function searchDB_forProductNr(n) {
 //--------------------------//
 function destroyDB() {
 	db.destroy();
+	console.info('DB destroyed.');
 }
 
 

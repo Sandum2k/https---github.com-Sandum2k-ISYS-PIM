@@ -209,6 +209,8 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
  
         //SEARCH DB FOR ENTRIES OF NODE TYPE CATALOG
         var promise = searchDB_forCatalogs();
+
+        if(!promise) { $('#noCat').text('Could not find any catalogs. Try to connect with API.'); }
  
         //WAIT FOR RESULT
         promise.then(function(result) {
@@ -233,7 +235,7 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
         //ERROR SEARCHING DB
         }).catch(function(err){
             console.log('Something went wrong searching DB for Catalogs');
-            console.error(err.status);
+            console.error(err);
         });
     }
  
@@ -267,7 +269,7 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
  
         //COULD NOT RETRIEVE SECTION NODES FROM DB
         }).catch(function(err){
-            console.error(err.status);
+            console.error(err);
         });
     }
  
@@ -300,7 +302,7 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
  
         //COULD NOT RETRIEVE PRODUCT NODES FROM DB
         }).catch(function(err) {
-            console.error(err.status);
+            console.error(err);
         });
     }
  
@@ -337,7 +339,7 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
  
         //COULD NOT RETRIEVE PRODUCT INFORMATION FROM DB
         }).catch(function(err) {
-            console.error(err.status);
+            console.error(err);
         });
     }
 
@@ -420,7 +422,7 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
     $scope.deleteDB = function() {
         var dbDeath = confirm('Do you want to delete database?');
         if(dbDeath == true) {
-            destroyDB();
+            var db = destroyDB();
         }
         else { return; }
     }
