@@ -1,7 +1,7 @@
 //--------------------------//
 //      DECLARE APP         //
 //--------------------------//
-var pim = angular.module("PIM", ['ngSanitize', 'LiveSearch']);
+var pim = angular.module("PIM", ['ngSanitize']);
  
  
  
@@ -133,6 +133,9 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
         //IF NAV IS NOT DEFINED: DO NOTHING
         if(!nav) { return; }
  
+        //IF NAV IS SEARCH RESULT: LOAD MAIN PAGE AND CLEAR PRODUCT INFO
+        if (nav === 'SEARCH RESULT') { activate_subpage("#uib_page_2"); }
+
         //IF NAV OBJECT TYPE IS CATALOG: OPEN CATALOGS
         if(nav.NodeType === 'CATALOG') { openNodeCatalogs(); }
  
@@ -294,10 +297,10 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
     //GET PRODUCT INFORMATION AND UPDATE VIEW WITH RESULT
     //Does require object parameter to determine 'productId'.
     function openProductInfo(nodeObject) {
- 
+
         //GET PRODUCT ID ATTRIBUTE FROM PRODUCT NODE
         var productId   = nodeObject.productId;
- 
+
         //SEARCH DB FOR ENTRIES WITH PRODUCT ID
         var productInfo = searchDB_byId(productId);
  
@@ -307,15 +310,15 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
             //DISPLAY CURRENT NODE: PRODUCT INFORMATION
             $scope.viewNode = 'PRODUCT INFO';
  
-            //UPDATE VIEW
+            //POPULATE VIEW
             $scope.$apply(function() {
                 console.info('Display Product Info');
-                nav                     = nodeObject;
+                nav = nodeObject;
 
                 //FOR EACH BECAUSE THE CODE DOESN'T KNOW WE ONLY GET ONE PRODUCT
                 angular.forEach(result.docs, function(obj){
                     $scope.productInformation   = obj;
-                    $scope.prodDescription      = obj.description;                  
+                    $scope.prodDescription      = obj.description;               
                 });
  
                 console.log('nav is: ' + nav.NodeType +': ' + nav.nodeName);
@@ -327,57 +330,63 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
             console.error(err.status);
         });
     }
-});
 
 
 
-pim.controller("userSearch", function($scope, $http, $q, $window) {
 
-    $scope.mySearch = "";
-    $scope.dataz = [];
-    
-    $scope.mySearchCallback = function(params) {
+    //SEARCH DB FOR USER INPUT
+    $scope.userSearch = function() {
 
-        var defer = $q.defer();
-        var node = searchDB_getAllProducts();
+        //GET THE VALUE IN THE SEARCH FIELD
+        var searchInput = $('#searchInput').val();
 
-        node.then(function(result) {
-            $scope.$apply(function () {
+        if (searchInput === '') { 
+            $scope.$apply(function(){
+                $scope.productInformation = null;
+            });
+        }
+        else {
 
-                $scope.dataz = [];
+            console.log(searchInput);
 
-                console.log('i searched for: '+params.query);
+            //SEARCH DB BY ID
+            var maybeId = searchDB_byId(searchInput);
+            maybeId.then(function(result) {
 
-                //ONE OBJECT CONTAINING ALL THE OBJECTS TO BE COMPARED
-                angular.forEach(result.docs, function (obj) {
+                //IF RESULTS
+                if (result) { 
 
-                    var search = new RegExp(params.query, 'gi');
+                    //POPULATE VIEW
+                    $scope.$apply(function(){
+                        console.info('Display search result');
+                        nav = 'SEARCH RESULT';
 
-                    if (obj.productName.match(search)) {
-                        $scope.dataz.push({name: obj.productName});
-                    }
-                    else {
-                        console.log('miss on: ' + obj.productName);
-                    }
+                        angular.forEach(result.docs, function(obj) {
+                            console.log(obj);
+                            $scope.productInformation = obj;
+                        });
+                    });
+                }
 
-
-                });
+                else {
+                    
+                }
 
             });
-        })
-        .catch(function(err) {
 
-        });
+        }
 
-        defer.resolve($scope.dataz);
+        
+        
+    }
 
-        return defer.promise;
-    };
+
+
 });
 
-function callback(response, status) {
-  console.log(status);
-};
+
+
+
 
 
   

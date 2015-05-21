@@ -7,7 +7,7 @@
     
         //BUTTON: HOME
         $(document).on("click", ".uib_w_7", function(evt) {
-             activate_subpage("#uib_page_2"); 
+            activate_subpage("#uib_page_2"); 
         });
     
         //BUTTON: MAP
@@ -40,14 +40,13 @@
     
         //BUTTON: ??
         $(document).on("click", ".uib_w_12", function(evt) {
-
         });
 
 
         //BUTTON: SEARCH
         $(document).on("click", ".uib_w_16", function(evt) {
-            var userInput = $('#search1').val();
-            console.log(userInput);
+            angular.element($('#afui')).scope().userSearch();
+            $('#searchInput').val('');
         });
     
 
@@ -107,7 +106,7 @@
     
         /* listitem  List Item_sub_Produkter */
         $(document).on("click", ".uib_w_44", function(evt) {
-             activate_subpage("#uib_page_sub_Produkt_info"); 
+            activate_subpage("#uib_page_sub_Produkt_info"); 
         });
     
         /* listitem  Listelement seksjon */
