@@ -216,7 +216,7 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
             //IF NO CATALOGS ARE FOUND: DISPLAY MSG
             if (result.docs == false) { 
                 console.log('no catalogs found');
-                $('#noCat').text('No data saved. Try to sync with API.');
+                $('#noCat').text('No data saved. Try to connect with API.');
             }
             else { $('#noCat').text(''); }
 
@@ -416,5 +416,13 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
         });
     }
 
+    //DELETE DB
+    $scope.deleteDB = function() {
+        var dbDeath = confirm('Do you want to delete database?');
+        if(dbDeath == true) {
+            destroyDB();
+        }
+        else { return; }
+    }
 
 });

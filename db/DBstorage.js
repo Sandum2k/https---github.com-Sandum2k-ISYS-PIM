@@ -196,6 +196,14 @@ function searchDB_forProductNr(n) {
 	});
 }
 
+//--------------------------//
+//		DESTROY DB  		//
+//--------------------------//
+function destroyDB() {
+	db.destroy();
+}
+
+
 
 
 
