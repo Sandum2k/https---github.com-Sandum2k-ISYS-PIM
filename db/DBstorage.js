@@ -1,7 +1,9 @@
-//This document handles DB transactions
-//data is saved, updated and mapped to make it searchable.
-//DB used is Pouch DB (pouchdb.com)
-
+/*
+This document handles DB transactions
+data is saved, updated and mapped to make it searchable.
+Using Pouch DB: (pouchdb.com),
+with PouchDB Find snippet: (https://github.com/nolanlawson/pouchdb-find)
+*/
 
 //NEW DB
 var db = PouchDB('PIM_Storage');
@@ -214,9 +216,3 @@ db.getIndexes().then(function(result) {
 }).catch(function(err) {
   console.log(err);
 });
-
-
-
-
-
-

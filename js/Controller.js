@@ -1,3 +1,11 @@
+/*
+This document handles the business logic behind API calls,
+managing calls to the database, and updating the view
+with Angular elements. I.e. Catalog browsing and search.
+*/
+
+
+
 //--------------------------//
 //      DECLARE APP         //
 //--------------------------//
@@ -320,7 +328,7 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
                 //FOR EACH BECAUSE THE CODE DOESN'T KNOW WE ONLY GET ONE PRODUCT
                 angular.forEach(result.docs, function(obj){
                     $scope.productInformation   = obj;
-                    $scope.prodDescription      = obj.description;               
+                    $scope.searchMessage        = '';              
                 });
  
                 console.log('nav is: ' + nav.NodeType +': ' + nav.nodeName);
@@ -344,38 +352,52 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
 
         //GET THE VALUE IN THE SEARCH FIELD
         var searchInput = $('#searchInput').val();
-        console.log('user searched for: ' + searchInput);
+        console.info('user searched for: ' + searchInput);
 
 
         //SEARCH INPUT IS NOT EMPTY
         if (searchInput) {
 
+            //ERROR MESSAGE BY DEFAULT
+            $scope.$apply(function() {
+                $scope.searchMessage = 'No search results. This search only works on product ID and product number. Try the catalogs.';
+            });
+
             //CHECK IF SEARCH INPUT IS ID
             var maybeId = searchDB_byId(searchInput);
             maybeId.then(function(result) {
                 if (!jQuery.isEmptyObject(result.docs)) { 
+
+                    //REMOVE DEFAULT ERROR MSG
+                    $scope.searchMessage = '';
+
+                    //POPULATE VIEW
                     updateSearchView(result);
-
                     console.info('Searced and found object by ID');
-                    console.log(result.docs);
                 };
-            });
 
+            //SOME ERROR HAS OCCURED
+            }).catch(function(err) { console.error(err.status); });
 
             //CHECK IF SEARCH INPUT IS PRODUCT NUMBER
             var maybeNr = searchDB_forProductNr(searchInput);
             maybeNr.then(function(result) {
                 if (!jQuery.isEmptyObject(result.docs)) { 
-                    updateSearchView(result);
 
+                    //REMOVE DEFAULT ERROR MSG
+                    $scope.searchMessage = '';
+
+                    //POPULATE VIEW
+                    updateSearchView(result);
                     console.info('Searched and found object by Product number');
-                    console.log(result.docs);
                 };
-            });
+
+            //SOME ERROR HAS OCCURED
+            }).catch(function(err) { console.error(err.status); });
         }
 
         //SEARCH INPUT WAS EMPTY
-        if (searchInput === '' || !searchInput) { 
+        if (searchInput === '') { 
             $scope.$apply(function() {
                 $scope.productInformation   = null; 
                 $scope.searchMessage        = 'Search field was empty';
@@ -384,34 +406,15 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
     }
 
 
-
+    //APPLY SEARCH RESULT TO VIEW
     function updateSearchView(object) {
         angular.forEach(object.docs, function(obj){
             $scope.$apply(function() {
+                $scope.searchMessage = '';
                 $scope.productInformation = obj;
             });
-            
         });
     }
 
 
 });
-
-
-
-
-
-
-  
-
-
-
-
-
-    
-
-
-
-
-
-
