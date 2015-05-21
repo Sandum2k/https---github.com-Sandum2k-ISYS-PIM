@@ -134,7 +134,9 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
         if(!nav) { return; }
  
         //IF NAV IS SEARCH RESULT: LOAD MAIN PAGE AND CLEAR PRODUCT INFO
-        if (nav === 'SEARCH RESULT') { activate_subpage("#uib_page_2"); }
+        if (nav === 'SEARCH RESULT') { 
+            return;
+        }
 
         //IF NAV OBJECT TYPE IS CATALOG: OPEN CATALOGS
         if(nav.NodeType === 'CATALOG') { openNodeCatalogs(); }
@@ -337,49 +339,60 @@ pim.controller('ViewData', function($scope, $q, $http, $window) {
     //SEARCH DB FOR USER INPUT
     $scope.userSearch = function() {
 
+        //RESET PRODUCT INFO
+        $scope.productInformation = null;
+
         //GET THE VALUE IN THE SEARCH FIELD
         var searchInput = $('#searchInput').val();
+        console.log('user searched for: ' + searchInput);
 
-        if (searchInput === '') { 
-            $scope.$apply(function(){
-                $scope.productInformation = null;
-            });
-        }
-        else {
 
-            console.log(searchInput);
+        //SEARCH INPUT IS NOT EMPTY
+        if (searchInput) {
 
-            //SEARCH DB BY ID
+            //CHECK IF SEARCH INPUT IS ID
             var maybeId = searchDB_byId(searchInput);
             maybeId.then(function(result) {
+                if (!jQuery.isEmptyObject(result.docs)) { 
+                    updateSearchView(result);
 
-                //IF RESULTS
-                if (result) { 
-
-                    //POPULATE VIEW
-                    $scope.$apply(function(){
-                        console.info('Display search result');
-                        nav = 'SEARCH RESULT';
-
-                        angular.forEach(result.docs, function(obj) {
-                            console.log(obj);
-                            $scope.productInformation = obj;
-                        });
-                    });
-                }
-
-                else {
-                    
-                }
-
+                    console.info('Searced and found object by ID');
+                    console.log(result.docs);
+                };
             });
 
+
+            //CHECK IF SEARCH INPUT IS PRODUCT NUMBER
+            var maybeNr = searchDB_forProductNr(searchInput);
+            maybeNr.then(function(result) {
+                if (!jQuery.isEmptyObject(result.docs)) { 
+                    updateSearchView(result);
+
+                    console.info('Searched and found object by Product number');
+                    console.log(result.docs);
+                };
+            });
         }
 
-        
-        
+        //SEARCH INPUT WAS EMPTY
+        if (searchInput === '' || !searchInput) { 
+            $scope.$apply(function() {
+                $scope.productInformation   = null; 
+                $scope.searchMessage        = 'Search field was empty';
+            });
+        };
     }
 
+
+
+    function updateSearchView(object) {
+        angular.forEach(object.docs, function(obj){
+            $scope.$apply(function() {
+                $scope.productInformation = obj;
+            });
+            
+        });
+    }
 
 
 });

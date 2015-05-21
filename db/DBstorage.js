@@ -133,6 +133,13 @@ db.createIndex({
 	}
 });
 
+//CREATE INDEX OVER PRODUCT NUMBER
+db.createIndex({
+	index: {
+		fields: ['productNr']
+	}
+});
+
 
 //--------------------------//
 //		SEARCH DB 	 		//
@@ -180,13 +187,10 @@ function searchDB_byId(id) {
 	});
 }
 
-//SEARCH DB FOR ALL PRODUCTS
-function searchDB_getAllProducts() {
+//SEARCH DB FOR PRODUCT NUMBER
+function searchDB_forProductNr(n) {
 	return db.find({
-		selector: { 
-			productName: {$exists: true} 
-		},
-		sort: ['productName']
+		selector: { productNr: {$eq: n} }
 	});
 }
 
