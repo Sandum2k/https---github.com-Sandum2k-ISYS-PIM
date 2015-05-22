@@ -25,9 +25,7 @@
         //BUTTON: CAMERA
         $(document).on("click", ".uib_w_13", function(evt) {
 
-            //GET BARCODE INPUT
-            intel.xdk.device.scanBarcode();
-
+            
             //APPLY INPUT TO SEARCH FIELD
             document.addEventListener("intel.xdk.device.barcode.scan", function(evt) {
                 navigator.notification.beep(1);
@@ -50,9 +48,7 @@
         });
     
 
-
-    
-        //BUTTON: ??
+        //BUTTON: MAP
         $(document).on("click", ".uib_w_40", function(evt) {
              
             console.log('clicked uib w 40');
@@ -95,7 +91,7 @@
 
 
 
-        //BUTTON: ??
+        //BUTTON: CATALOGS
         $(document).on("click", ".uib_w_41", function(evt) {
              activate_subpage("#uib_page_3");
              
